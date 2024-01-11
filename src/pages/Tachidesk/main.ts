@@ -4,7 +4,7 @@ import { pageInterface } from '../pageInterface';
 export const Tachidesk: pageInterface = {
   name: 'Tachidesk',
   domain: 'https://suwayomi-webui-preview.github.io/',
-  languages: [ 'English' ],
+  languages: ['English'],
   type: 'manga',
   isSyncPage(url) {
     if (url.split('/')[5] === 'chapter') {
@@ -20,7 +20,11 @@ export const Tachidesk: pageInterface = {
   },
   sync: {
     getTitle(url) {
-      return j.$('title').text().replace(/(.+): .+ - Tachidesk/g,'$1').replace(' - Tachidesk','');
+      return j
+      .$('title')
+      .text()
+      .replace(/(.+): .+ - Tachidesk/g, '$1')
+      .replace(' - Tachidesk', '');
     },
     getIdentifier(url) {
       return utils.urlPart(url, 4);
@@ -32,8 +36,7 @@ export const Tachidesk: pageInterface = {
       return parseInt(utils.urlPart(url, 6));
     },
     getVolume(url) {
-      let temp = utils
-        .getBaseText(j.$('title'))
+      let temp = utils.getBaseText(j.$('title'))
         .match(/(vol\.|volume)\D?\d+/i);
       if (temp) {
         temp = temp[0].match(/\d+/);
@@ -77,7 +80,7 @@ export const Tachidesk: pageInterface = {
         return j.$('ul.chaptersList > li.chapter-item');
       },
       elementUrl(selector) {
-        return  utils.absoluteLink(selector.find('a').first().attr('href') || '', Tachidesk.domain);
+        return utils.absoluteLink(selector.find('a').first().attr('href') || '', Tachidesk.domain);
       },
       elementEp(selector) {
         return Tachidesk.sync.getEpisode(Tachidesk.overview!.list!.elementUrl!(selector));
@@ -90,11 +93,13 @@ export const Tachidesk: pageInterface = {
       require('!to-string-loader!css-loader!less-loader!./style.less').toString(),
     );
     utils.fullUrlChangeDetect(() => {
-        page.reset();
-        clearInterval(interval);
-        interval = utils.waitUntilTrue(() => {
-            return j.$('title').length;
-        }, () => {
+      page.reset();
+      clearInterval(interval);
+      interval = utils.waitUntilTrue(
+        () => {
+          return j.$('title').length;
+        },
+          () => {
             page.handlePage();
         });
     });
