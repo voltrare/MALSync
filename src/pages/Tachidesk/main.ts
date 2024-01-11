@@ -1,4 +1,3 @@
-
 import { pageInterface } from '../pageInterface';
 
 export const Tachidesk: pageInterface = {
@@ -21,10 +20,10 @@ export const Tachidesk: pageInterface = {
   sync: {
     getTitle(url) {
       return j
-      .$('title')
-      .text()
-      .replace(/(.+): .+ - Tachidesk/g, '$1')
-      .replace(' - Tachidesk', '');
+          .$('title')
+          .text()
+          .replace(/(.+): .+ - Tachidesk/g, '$1')
+          .replace(' - Tachidesk', '');
     },
     getIdentifier(url) {
       return utils.urlPart(url, 4);
@@ -36,8 +35,7 @@ export const Tachidesk: pageInterface = {
       return parseInt(utils.urlPart(url, 6));
     },
     getVolume(url) {
-      let temp = utils.getBaseText(j.$('title'))
-        .match(/(vol\.|volume)\D?\d+/i);
+      let temp = utils.getBaseText(j.$('title')).match(/(vol\.|volume)\D?\d+/i);
       if (temp) {
         temp = temp[0].match(/\d+/);
         if (temp) {
@@ -99,9 +97,10 @@ export const Tachidesk: pageInterface = {
         () => {
           return j.$('title').length;
         },
-          () => {
-            page.handlePage();
-        });
+        () => {
+          page.handlePage();
+        },
+        );
     });
-}
+},
 };
