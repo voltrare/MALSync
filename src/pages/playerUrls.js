@@ -681,6 +681,7 @@ module.exports = {
       '*://morganoperationface.com/e/*',
       '*://markstyleall.com/e/*',
       '*://jayservicestuff.com/e/*',
+      '*://sharonwhiledemocratic.com/e/*',
       // auto-voe-replace-dont-remove
     ],
   },
